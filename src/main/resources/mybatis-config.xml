@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!--    <settings 中的 ogimp 属性配置指定使用 LOG4J 输出日志-->
+<!--    <settings>-->
+<!--        <setting name="logImpl" value="LOG4J"/>-->
+<!--    </settings>-->
+<!--    <typeAliases ＞元素下面配置了 个包的别名，通常确定 个类的时候需要使用类的-->
+<!--    全限定名称 ，例如 tk .m ybatis .simple.model.Country 。在 MyBatis 需要频-->
+<!--    用到类的全限定名称，为了方便使用，我们配置了 tk .mybatis. simple .model 包，-->
+<!--    这样配置后，在使用类的时候不需要写包名的部分，只使用 Couηtry 即可。-->
+    <typeAliases>
+        <package name="org.example.model"/>
+    </typeAliases>
+    <!-- 配置数据源 -->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <!-- 数据库连接信息 -->
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis1"/>
+                <property name="username" value="root"/>
+                <property name="password" value="password"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 配置映射文件 -->
+    <mappers>
+        <!-- 示例：使用 XML 映射文件 -->
+<!--        <mapper resource="mapper/MenuDOMapper.xml"/>-->
+<!--        <mapper resource="mapper/RuleDOMapper.xml"/>-->
+<!--        <mapper resource="mapper/UserDOMapper.xml"/>-->
+
+        <package name="org.example.dao"/>
+    </mappers>
+</configuration>
