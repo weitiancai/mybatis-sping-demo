@@ -1,7 +1,9 @@
 package com.example.dao;
 
 import com.example.model.MenuDO;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface MenuDOMapper {
     int deleteByPrimaryKey(Long id);
 

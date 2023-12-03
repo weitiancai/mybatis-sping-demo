@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+<!--    xml引入 properties 的方法-->
+    <context:property-placeholder location="classpath:application.properties" />
+
+    <!--datasource-->
+    <bean id="commDataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource">
+        <property name="username" value="${spring.datasource.username}"/>
+        <property name="url" value="${spring.datasource.url}"/>
+        <property name="password" value="${spring.datasource.password}"/>
+        <property name="driver" value="${spring.datasource.driver-class-name}"/>
+    </bean>
+<!--这一行是mybatis的创建方法-->
+    <bean id="commSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <!--这一行是mybatis-plus的创建方法-->
+<!--    <bean id="commSqlSessionFactory" class="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean"name="commSqlSessionFactory">-->
+        <property name="dataSource" ref="commDataSource" />
+        <property name="mapperLocations" value="classpath:mapper/*.xml" />
+        <property name="configuration">
+            <bean class="org.apache.ibatis.session.Configuration">
+                <property name="mapUnderscoreToCamelCase" value="true"/>
+            </bean>
+        </property>
+<!--        通过configLocation使用其他配置文件配置，但是configLocation与configuration不能共存-->
+    </bean>
+
+    <bean id="commTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="commDataSource"/>
+    </bean>
+</beans>
